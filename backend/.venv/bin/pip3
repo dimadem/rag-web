@@ -1,4 +1,4 @@
-#!/Users/dimadem/Documents/GitHub/rag-web/backend/.venv/bin/python3.12
+#!/home/admin/rag-web/backend/.venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
