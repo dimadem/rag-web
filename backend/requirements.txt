@@ -1,5 +1,6 @@
 Flask
-gunicorn
-langchain-openai
-langchain-core
+requests
+langchain
+langchain_openai
 python-dotenv
+gunicorn
