@@ -4,7 +4,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'POST') {
         const { question } = req.body;
 
-        const response = await fetch('http://3.68.186.140:8000/api/ask', {
+        const response = await fetch('http://52.57.91.70:8000/api/ask', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
