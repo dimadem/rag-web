@@ -2,12 +2,12 @@
 
 import { useState } from 'react';
 
-type Message = {
-    role: 'user' | 'assistant';
-    content: string;
-};
+type Role = 'user' | 'assistant';
 
-//!fix types 
+interface Message {
+    content: string;
+    role: Role;
+}
 
 const ChatUi = () => {
     const [messages, setMessages] = useState<Message[]>([]);
@@ -16,7 +16,7 @@ const ChatUi = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        const newMessages = [
+        const newMessages: Message[] = [
             ...messages,
             { content: input, role: 'user' },
         ];
