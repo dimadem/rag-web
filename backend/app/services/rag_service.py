@@ -2,35 +2,32 @@ from langchain_openai import ChatOpenAI
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 import os
+from app.services.search_service import search_and_parse
+from app.services.buffer.utils import clear_buffer
 
-# Инициализация модели OpenAI
 chat_model = ChatOpenAI(
-    model="gpt-3.5-turbo-0125",
+    model="gpt-4o",
+    max_tokens=4000,
     temperature=0,
     api_key=os.environ["OPENAI_API_KEY"]
 )
 
-# Шаблон для RAG
 rag_prompt = ChatPromptTemplate.from_messages([
     ("system", 'You are a helpful assistant. Use the following context when responding:\n\n{context}.'),
-    ("human", "{question}")
+    ("user", "{question}")
 ])
 
-# Цепочка RAG
 rag_chain = rag_prompt | chat_model | StrOutputParser()
 
+
+
 def process_question(question, context):
+    data_from_web = search_and_parse(question)
     if context is None:
-        context = """
-        Old Ship Saloon 2023 quarterly revenue numbers:
-        Q1: $174782.38
-        Q2: $467372.38
-        Q3: $474773.38
-        """
-    
+        context = data_from_web
+        print("context->>>>", context)
     response = rag_chain.invoke({
         "question": question,
         "context": context
     })
-    
     return response

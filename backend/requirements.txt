@@ -4,3 +4,5 @@ langchain
 langchain_openai
 python-dotenv
 gunicorn
+selenium
+webdriver-manager
