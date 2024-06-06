@@ -55,7 +55,7 @@ const ChatUi = () => {
             </div>
             <form onSubmit={handleSubmit}>
                 <input
-                    className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
+                    className="fixed bottom-0 w-[90%] max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl mx-4"
                     value={input}
                     placeholder="Say something..."
                     onChange={e => setInput(e.target.value)}
