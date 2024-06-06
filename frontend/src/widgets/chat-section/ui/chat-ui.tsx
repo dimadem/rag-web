@@ -41,14 +41,18 @@ const ChatUi = () => {
     };
 
     return (
-        <div className="flex flex-col w-full h-screen max-w-md py-24 mx-auto stretch">
-            {messages.map((m, i: number) => (
-                <div key={i} className="whitespace-pre-wrap">
-                    {m.role === 'user' ? 'User: ' : 'AI: '}
-                    {m.content}
-                </div>
-            ))}
 
+        <div className="flex flex-col w-full h-screen max-w-md py-24 mx-auto stretch">
+            <div className='overflow-auto max-h-screen'>
+                {messages.map((m, i: number) => (
+                    <div key={i} className="whitespace-pre-wrap p-1">
+                        <span className='font-bold uppercase'>
+                            {m.role === 'user' ? 'USER -> ' : 'AI  -> '}
+                        </span>
+                        {m.content}
+                    </div>
+                ))}
+            </div>
             <form onSubmit={handleSubmit}>
                 <input
                     className="fixed bottom-0 w-full max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl"
@@ -56,6 +60,9 @@ const ChatUi = () => {
                     placeholder="Say something..."
                     onChange={e => setInput(e.target.value)}
                 />
+                {/* <button className="fixed bottom-0 right-0 p-2 mb-8 mr-2 bg-gray-900 text-white rounded shadow-xl">
+                    -&gt;&gt;
+                </button> */}
             </form>
         </div>
     );
