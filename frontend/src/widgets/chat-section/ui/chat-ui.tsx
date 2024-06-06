@@ -42,8 +42,8 @@ const ChatUi = () => {
 
     return (
 
-        <div className="flex flex-col w-full h-screen max-w-md py-24 mx-auto stretch">
-            <div className='overflow-auto max-h-screen'>
+        <div className="flex flex-col w-full h-svh max-w-md py-24 mx-auto stretch">
+            <div className='overflow-auto max-h-svh'>
                 {messages.map((m, i: number) => (
                     <div key={i} className="whitespace-pre-wrap p-1">
                         <span className='font-bold uppercase'>
