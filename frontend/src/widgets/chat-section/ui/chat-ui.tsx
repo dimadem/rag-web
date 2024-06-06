@@ -43,7 +43,7 @@ const ChatUi = () => {
     return (
 
         <div className="flex flex-col w-full h-svh max-w-md py-24 mx-auto stretch">
-            <div className='overflow-auto max-h-svh'>
+            <div className='overflow-auto max-h-svh mx-4'>
                 {messages.map((m, i: number) => (
                     <div key={i} className="whitespace-pre-wrap p-1">
                         <span className='font-bold uppercase'>
