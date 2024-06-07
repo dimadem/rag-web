@@ -25,7 +25,7 @@ def process_question(question, context):
     data_from_web = search_and_parse(question)
     if context is None:
         context = data_from_web
-        print("context->>>>", context)
+        print("context->>>> ", context)
     response = rag_chain.invoke({
         "question": question,
         "context": context

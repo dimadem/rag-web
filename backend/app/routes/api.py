@@ -5,7 +5,7 @@ from . import api_bp
 
 @api_bp.route('/ask', methods=['POST'])
 def ask():
-    print(request.json)
+    print("frontend->> ", request.json)
     data = request.json
     question = data.get('question')
     context = data.get('context', None) #todo add context 

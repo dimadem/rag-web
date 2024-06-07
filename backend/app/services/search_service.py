@@ -10,9 +10,10 @@ from app.services.buffer.utils import write_prompt, write_link, write_text, load
 import time
 
 def Chrome():
+    service = Service(ChromeDriverManager().install())
     options = Options()
     options.add_argument("--headless")
-    service = Service(ChromeDriverManager().install())
+    options.add_argument('--no-sandbox')
     driver = webdriver.Chrome(service=service, options=options)
     return driver
 
