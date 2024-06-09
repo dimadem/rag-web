@@ -1,8 +1,8 @@
-Flask
+python-dotenv
+flask
+gunicorn
 requests
 langchain
 langchain_openai
-python-dotenv
-gunicorn
 selenium
-webdriver-manager
+beautifulsoup4
