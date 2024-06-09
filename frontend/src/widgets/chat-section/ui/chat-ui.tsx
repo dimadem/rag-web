@@ -1,6 +1,12 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { Input } from '@/shared/components/ui/input';
+import { Button } from '@/shared/components/ui/button';
+import { ScrollArea } from '@/shared/components/ui/scroll-area';
+import { Separator } from '@/shared/components/ui/separator';
+import { Badge } from '@/shared/components/ui/badge';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/shared/components/ui/tooltip';
 
 type Role = 'user' | 'assistant';
 
@@ -9,13 +15,11 @@ interface Message {
     role: Role;
 }
 
-
 //todo scroll to bottom
 
 const ChatUi = () => {
     const [messages, setMessages] = useState<Message[]>([]);
     const [input, setInput] = useState('');
-
 
     const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
@@ -26,10 +30,7 @@ const ChatUi = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
 
-        const newMessages: Message[] = [
-            ...messages,
-            { content: input, role: 'user' },
-        ];
+        const newMessages: Message[] = [...messages, { content: input, role: 'user' }];
 
         setMessages(newMessages);
         setInput('');
@@ -44,47 +45,52 @@ const ChatUi = () => {
 
         const data = await response.json();
 
-        setMessages([
-            ...newMessages,
-            { role: 'assistant', content: data.response },
-        ]);
+        setMessages([...newMessages, { role: 'assistant', content: data.response }]);
     };
 
     return (
-        <div className='relative w-svw h-svh'>
+        <div className="relative h-svh w-svw">
             {/* bg */}
-            <div className='absolute flex items-center justify-center -z-10 blur-sm w-full h-full'>
-                <p className='text-9xl uppercase text-pretty break-words text-center'>
-                    {input}
-                </p>
+            <div className="absolute -z-10 flex h-full w-full items-center justify-center blur-sm">
+                <p className="text-pretty break-words text-center text-9xl">{input}</p>
             </div>
+            <nav className="flex flex-row items-center gap-5 text-sm">
+                <p className='mx-auto my-2 text-xl'>RAG & WIKI</p>
+            </nav>
             {/* messages */}
-            <div className='absolute z-0 w-full h-full'>
-                <div className="flex flex-col w-full h-svh max-w-md py-24 mx-auto stretch">
-                    <div className='overflow-auto max-h-svh mx-4'>
+            <div className="absolute z-0 h-full w-full">
+                <div className="stretch mx-auto flex w-full max-w-md flex-col h-full">
+                    <ScrollArea className="flex-1 rounded-md border p-4 mx-2 h-full mb-32">
                         {messages.map((m, i: number) => (
-                            <div key={i} className="whitespace-pre-wrap p-1">
-                                <span className='font-bold uppercase'>
-                                    {m.role === 'user' ? 'USER -> ' : 'AI   -> '}
-                                </span>
+                            <div
+                                key={i}
+                                className="relative whitespace-pre-wrap p-1">
+                                <br />
+                                <Badge className='text-pretty flex items-end justify-end w-fit ml-auto'>
+                                    {m.role === 'user' ? 'USER' : ' AI '}
+                                </Badge>
+                                <br />
                                 {m.content}
+                                <br />
+                                <br />
+                                <Separator />
                             </div>
                         ))}
-                    </div>
-                    <form onSubmit={handleSubmit}>
-                        <input
-                            className="fixed bottom-0 w-[90%] max-w-md p-2 mb-8 border border-gray-300 rounded shadow-xl mx-4 text-black"
+                    </ScrollArea>
+                    <form
+                        onSubmit={handleSubmit}
+                        className='fixed bottom-0 mb-8 flex w-svw sm:max-w-md items-center justify-between space-x-2 px-2'>
+                        <Input
+                            type="text"
                             value={input}
-                            placeholder="Say something..."
-                            onChange={e => setInput(e.target.value)}
+                            placeholder="Write Wikipedia title"
+                            onChange={(e) => setInput(e.target.value)}
                         />
-                        {/* <button className="fixed bottom-0 right-0 p-2 mb-8 mr-2 bg-gray-900 text-white rounded shadow-xl">
-                    -&gt;&gt;
-                </button> */}
+                        <Button type='submit'>send</Button>
                     </form>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 };
 

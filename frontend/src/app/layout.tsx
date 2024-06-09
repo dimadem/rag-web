@@ -1,12 +1,12 @@
-import type { Metadata } from "next";
-import { Roboto_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next';
+import { Roboto_Mono } from 'next/font/google';
+import './globals.css';
 
-const mono = Roboto_Mono({ subsets: ["latin"], weight: "400" });
+const mono = Roboto_Mono({ subsets: ['latin'], weight: '400' });
 
 export const metadata: Metadata = {
-  title: "web rag",
-  description: "web app for rag",
+  title: 'web rag',
+  description: 'web app for rag',
 };
 
 export default function RootLayout({
